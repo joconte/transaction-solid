@@ -1,6 +1,6 @@
 pipeline {
 	 agent {
-		label 'slave-java-dd883a16'
+		label 'master'
 	 }
 	 triggers {
         pollSCM('H/1 * * * *')
@@ -22,17 +22,17 @@ pipeline {
             }
         }
         stage('Inspection') {
-            steps{
+             steps{
                 sh "mvn sonar:sonar"
-            }
+             }
         }
     }
     post {
         always {
             step([$class: 'Mailer', recipients: [emailextrecipients([[$class:
             'CulpritsRecipientProvider'], [$class: 'RequesterRecipientProvider']])].join(' ')])
-            archiveArtifacts '*/target/*.jar'
-            junit '*/target/surefire-reports/*.xml'
+            archiveArtifacts 'target/*.jar'
+            junit 'target/surefire-reports/*.xml'
         }
     }
 }
