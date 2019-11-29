@@ -20,6 +20,6 @@ public class TransactionAllForOneTest {
         transaction.makeTransaction(person1, person2);
 
         // Act
-        assertTrue((person1.getWealth() == 0D && person2.getWealth() == 40D) || (person1.getWealth() == 40D && person1.getWealth() == 0D));
+        assertTrue((person1.getWealth() == 0D && person2.getWealth() == 40D) || (person1.getWealth() == 40D && person2.getWealth() == 0D));
     }
 }
