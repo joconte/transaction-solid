@@ -13,12 +13,6 @@ public class CreatePopulation implements ICreatePopulation {
             persons[j] = new Person(i, 0);
             i += 1L;
         }
-        /*
-        for (Person person : persons) {
-            person = new Person(i, 0);
-            person.setId(i);
-            i += 1L;
-        }*/
         return persons;
     }
 }
