@@ -5,12 +5,14 @@ import fr.epsi.jconte.model.impl.Person;
 import fr.epsi.jconte.service.impl.TransactionAllForOne;
 import org.junit.Test;
 
+import java.security.NoSuchAlgorithmException;
+
 import static org.junit.Assert.*;
 
 public class TransactionAllForOneTest {
 
     @Test
-    public void makeTransaction() {
+    public void makeTransaction() throws NoSuchAlgorithmException {
         // Arrange
         IPerson person1 = new Person(1L, 10);
         IPerson person2 = new Person(2L, 30);
