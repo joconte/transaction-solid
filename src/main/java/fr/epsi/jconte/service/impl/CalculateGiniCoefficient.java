@@ -19,6 +19,9 @@ public class CalculateGiniCoefficient {
             subsum += persons[i].getWealth();
         }
 
+        if (subsum == 0)
+            return 0;
+
         return sumOfAbsoluteDifferences / subsum / persons.length;
     }
 }
