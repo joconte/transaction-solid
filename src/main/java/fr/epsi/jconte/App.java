@@ -9,11 +9,12 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
+import java.security.NoSuchAlgorithmException;
 
 
 public class App
 {
-    public static void main( String[] args ) throws IOException, ParseException {
+    public static void main( String[] args ) throws IOException, ParseException, NoSuchAlgorithmException {
 
         // Parametrage
         Logger logger = Logger.getLogger(App.class);
