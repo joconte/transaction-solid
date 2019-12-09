@@ -3,19 +3,18 @@ package fr.epsi.jconte.service.impl;
 import fr.epsi.jconte.model.IPerson;
 import fr.epsi.jconte.service.IPopulate;
 
-import java.util.Random;
+import java.security.NoSuchAlgorithmException;
 
 public class PopulateConstantDistribution implements IPopulate {
 
     private double wealth;
 
-    public PopulateConstantDistribution(double wealth) {
+    public PopulateConstantDistribution(double wealth) throws NoSuchAlgorithmException {
         this.wealth = wealth;
     }
 
     @Override
     public IPerson[] populate(IPerson[] persons) {
-        Random r = new Random();
 
         for (int i = 0; i < persons.length; i++) {
             persons[i].setWealth(wealth);
