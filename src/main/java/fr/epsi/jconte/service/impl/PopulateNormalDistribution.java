@@ -8,13 +8,21 @@ import java.security.SecureRandom;
 
 public class PopulateNormalDistribution implements IPopulate {
 
-    private SecureRandom random = SecureRandom.getInstanceStrong();
+    private SecureRandom random;
+
+    {
+        try {
+            random = SecureRandom.getInstanceStrong();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+    }
 
     private double mean;
 
     private double deviation;
 
-    public PopulateNormalDistribution(double mean, double deviation) throws NoSuchAlgorithmException {
+    public PopulateNormalDistribution(double mean, double deviation) {
         this.mean = mean;
         this.deviation = deviation;
     }

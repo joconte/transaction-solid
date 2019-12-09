@@ -8,9 +8,14 @@ import java.security.SecureRandom;
 
 public class TransactionAllForOne implements ITransaction {
 
-    private SecureRandom random = SecureRandom.getInstanceStrong();
+    private SecureRandom random;
 
-    public TransactionAllForOne() throws NoSuchAlgorithmException {
+    {
+        try {
+            random = SecureRandom.getInstanceStrong();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

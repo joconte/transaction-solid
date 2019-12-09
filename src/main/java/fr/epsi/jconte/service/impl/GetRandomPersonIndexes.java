@@ -18,8 +18,6 @@ public class GetRandomPersonIndexes implements IGetPersonsIndexes {
             indexPerson2 = new SecureRandom().nextInt(persons.length);
         }
 
-        Pair<IPerson, IPerson> personIPersonPair = new Pair<>(persons[indexPerson1], persons[indexPerson2]);
-
-        return personIPersonPair;
+        return new Pair<>(persons[indexPerson1], persons[indexPerson2]);
     }
 }

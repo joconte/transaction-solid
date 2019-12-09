@@ -24,6 +24,6 @@ public class CalculateGiniCoefficientTest {
         double giniCoefficient = calculateGiniCoefficient.getGiniCoefficient(persons);
 
         // Assert
-        assertEquals(giniCoefficient, 0, 0.0);
+        assertEquals(giniCoefficient ,0, 0.0);
     }
 }

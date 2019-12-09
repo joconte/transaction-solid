@@ -14,8 +14,6 @@ public class GetRandomPersonAndOneOfHisNeightboor implements IGetPersonsIndexes 
 
         int indexPerson2 = indexPerson1 < persons.length - 1 ? indexPerson1 + 1 : indexPerson1 - 1;
 
-        Pair<IPerson, IPerson> personIPersonPair = new Pair<>(persons[indexPerson1], persons[indexPerson2]);
-
-        return personIPersonPair;
+        return new Pair<>(persons[indexPerson1], persons[indexPerson2]);
     }
 }
