@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 public class TransactionAllForOneTest {
 
     @Test
-    public void makeTransaction() throws NoSuchAlgorithmException {
+    public void makeTransaction() {
         // Arrange
         IPerson person1 = new Person(1L, 10);
         IPerson person2 = new Person(2L, 30);
