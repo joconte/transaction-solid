@@ -4,8 +4,15 @@ import fr.epsi.jconte.model.impl.Person;
 import fr.epsi.jconte.service.ICreatePopulation;
 
 public class CreatePopulation implements ICreatePopulation {
+
+    private int numberOfPerson;
+
+    public CreatePopulation(int numberOfPerson) {
+        this.numberOfPerson = numberOfPerson;
+    }
+
     @Override
-    public Person[] initPopulationNoWealth(int numberOfPerson) {
+    public Person[] initPopulationNoWealth() {
         Person[] persons = new Person[numberOfPerson];
         Long i = 1L;
 
@@ -14,5 +21,10 @@ public class CreatePopulation implements ICreatePopulation {
             i += 1L;
         }
         return persons;
+    }
+
+    @Override
+    public int getNumberOfPerson() {
+        return this.numberOfPerson;
     }
 }

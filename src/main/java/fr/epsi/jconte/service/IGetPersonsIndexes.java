@@ -5,5 +5,5 @@ import org.javatuples.Pair;
 
 public interface IGetPersonsIndexes {
 
-    Pair<IPerson, IPerson> getTwoRandomPerson(IPerson[] persons);
+    Pair<IPerson, IPerson> getTwoPersons(IPerson[] persons);
 }

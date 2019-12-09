@@ -14,7 +14,7 @@ public class GetRandomPersonAndOneOfHisNeightboorTest {
     public void getRandomPersonAndOneOfHisNNeighBoor() {
 
         // Arrange
-        IGetRandomPersonAndNeighboor getRandomPersonAndNeighboor = new GetRandomPersonAndOneOfHisNeightboor();
+        IGetPersonsIndexes getRandomPersonAndNeighboor = new GetRandomPersonAndOneOfHisNeightboor();
         IPerson[] persons = new IPerson[10];
         IPerson person1 = new Person(1L, 10);
         IPerson person2 = new Person(2L, 10);
@@ -38,7 +38,7 @@ public class GetRandomPersonAndOneOfHisNeightboorTest {
         persons[9] = person10;
 
         // Act
-        Pair<IPerson, IPerson> pairs = getRandomPersonAndNeighboor.getRandomPersonAndOneOfHisNNeighBoor(persons);
+        Pair<IPerson, IPerson> pairs = getRandomPersonAndNeighboor.getTwoPersons(persons);
 
         // Assert
         assertTrue(Math.abs(pairs.getValue0().getId() - pairs.getValue1().getId()) == 1);

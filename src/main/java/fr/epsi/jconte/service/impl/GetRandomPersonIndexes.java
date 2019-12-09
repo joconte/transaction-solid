@@ -9,7 +9,7 @@ import java.util.Random;
 public class GetRandomPersonIndexes implements IGetPersonsIndexes {
 
     @Override
-    public Pair<IPerson, IPerson> getTwoRandomPerson(IPerson[] persons) {
+    public Pair<IPerson, IPerson> getTwoPersons(IPerson[] persons) {
         int indexPerson1 = new Random().nextInt(persons.length);
 
         int indexPerson2 = new Random().nextInt(persons.length);

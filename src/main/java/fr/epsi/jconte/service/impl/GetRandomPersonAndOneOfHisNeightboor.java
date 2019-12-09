@@ -1,14 +1,14 @@
 package fr.epsi.jconte.service.impl;
 
 import fr.epsi.jconte.model.IPerson;
-import fr.epsi.jconte.service.IGetRandomPersonAndNeighboor;
+import fr.epsi.jconte.service.IGetPersonsIndexes;
 import org.javatuples.Pair;
 
 import java.util.Random;
 
-public class GetRandomPersonAndOneOfHisNeightboor implements IGetRandomPersonAndNeighboor {
+public class GetRandomPersonAndOneOfHisNeightboor implements IGetPersonsIndexes {
     @Override
-    public Pair<IPerson, IPerson> getRandomPersonAndOneOfHisNNeighBoor(IPerson[] persons) {
+    public Pair<IPerson, IPerson> getTwoPersons(IPerson[] persons) {
 
         int indexPerson1 = new Random().nextInt(persons.length);
 

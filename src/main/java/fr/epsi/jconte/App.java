@@ -1,77 +1,66 @@
 package fr.epsi.jconte;
 
-import fr.epsi.jconte.model.IPerson;
-import fr.epsi.jconte.service.ICreatePopulation;
-import fr.epsi.jconte.service.IGetPersonsIndexes;
-import fr.epsi.jconte.service.IPopulateNormalDistribution;
-import fr.epsi.jconte.service.ITransaction;
+import fr.epsi.jconte.service.*;
 import fr.epsi.jconte.service.impl.*;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
-import org.javatuples.Pair;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
+import java.io.*;
 
 
 public class App
 {
-    public static void main( String[] args )
-    {
+    public static void main( String[] args ) throws IOException, ParseException {
 
+        // Parametrage
         Logger logger = Logger.getLogger(App.class);
+
+        JSONParser jsonParser = new JSONParser();
+
+        File file = new File(
+                App.class.getClassLoader().getResource("init.json").getFile()
+        );
+
+        FileReader fileReader = new FileReader(file);
+        Object obj = jsonParser.parse(fileReader);
+        JSONObject jsonObject = (JSONObject)obj;
+        Long numberOfPersonLong = (Long)jsonObject.get("taillePopulation");
+        Long meanLong = (Long)jsonObject.get("mean");
+        Long deviationLong = (Long)jsonObject.get("deviation");
+        Long nombreIterationLong = (Long)jsonObject.get("nombreIteration");
+        int numberOfPerson = numberOfPersonLong.intValue();
+        int mean = meanLong.intValue();
+        int deviation = deviationLong.intValue();
+        int numberOfIteration = nombreIterationLong.intValue();
+
+/*
+        int numberOfPerson = 100;
+        int mean = 100;
+        int deviation = 20;
+        int numberOfIteration = 1000;
+ */
+        int wealth = 100;
+
         BasicConfigurator.configure();
-        ICreatePopulation createPopulation = new CreatePopulation();
-        IPopulateNormalDistribution populateNormalDistribution = new PopulateNormalDistribution();
-
-        int taillePopulation = 100;
-
-        logger.info("Create a population of " + taillePopulation + " persons");
-        IPerson[] persons = createPopulation.initPopulationNoWealth(taillePopulation);
-
-        double mean = 100;
-        double deviation = 20;
-
-        populateNormalDistribution.populate(persons, mean, deviation);
-
-        logger.info("Add wealth to our population using a normal distribution of mean 100 and deviation 20");
-
-        CalculateGiniCoefficient calculateGiniCoefficient = new CalculateGiniCoefficient();
-        logger.info("Gini coefficient before any transaction :" + calculateGiniCoefficient.getGiniCoefficient(persons));
-
+        ICreatePopulation createPopulation = new CreatePopulation(numberOfPerson);
+        IPopulate populateNormalDistribution = new PopulateNormalDistribution(mean, deviation);
+        IPopulate populateConstantDistribution = new PopulateConstantDistribution(wealth);
         ITransaction transactionRandom = new TransactionRandom();
         IGetPersonsIndexes getRandomPerson = new GetRandomPersonIndexes();
-
-        int nombreIteration = 1000;
-
-        logger.info("Do " + nombreIteration + " iterations with random transaction between the population");
-
-        for (int i = 0; i < nombreIteration; i++) {
-
-            Pair<IPerson, IPerson> personPair = getRandomPerson.getTwoRandomPerson(persons);
-
-            transactionRandom.makeTransaction(personPair.getValue0(), personPair.getValue1());
-        }
-
-        logger.info("Gini coefficient after " + nombreIteration + " random transactions :" + calculateGiniCoefficient.getGiniCoefficient(persons));
-
-        logger.info("Now we will try with a all for one transaction.");
-
-        logger.info("Re init the population wealth");
-
-        populateNormalDistribution.populate(persons, mean, deviation);
-
-        logger.info("Gini coefficient before any transaction :" + calculateGiniCoefficient.getGiniCoefficient(persons));
-
+        IGetPersonsIndexes getNeighboorPerson = new GetRandomPersonAndOneOfHisNeightboor();
         ITransaction transactionAllForOne = new TransactionAllForOne();
 
-        logger.info("Do " + nombreIteration + " iterations with random transaction between the population");
+        logger.info("Simulation avec une distribution normale de moyenne 100 et ecart type 20. Transaction random.");
+        Simulation simulation = new Simulation(createPopulation, populateNormalDistribution, transactionRandom, getRandomPerson, numberOfIteration);
+        simulation.makeSimulation();
 
-        for (int i = 0; i < nombreIteration; i++) {
+        logger.info("Simulation avec une distribution constante de 100. Transaction voisin seulement, all for one.");
+        simulation = new Simulation(createPopulation, populateConstantDistribution, transactionAllForOne, getNeighboorPerson, numberOfIteration);
+        simulation.makeSimulation();
 
-            Pair<IPerson, IPerson> personPair = getRandomPerson.getTwoRandomPerson(persons);
-
-            transactionAllForOne.makeTransaction(personPair.getValue0(), personPair.getValue1());
-        }
-
-        logger.info("Gini coefficient after " + nombreIteration + " all for one transactions :" + calculateGiniCoefficient.getGiniCoefficient(persons));
 
     }
 }
