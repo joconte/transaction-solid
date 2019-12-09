@@ -5,11 +5,10 @@ import fr.epsi.jconte.service.ITransaction;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.Random;
 
 public class TransactionAllForOne implements ITransaction {
 
-    private Random random = SecureRandom.getInstanceStrong();
+    private SecureRandom random = SecureRandom.getInstanceStrong();
 
     public TransactionAllForOne() throws NoSuchAlgorithmException {
     }

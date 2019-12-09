@@ -5,11 +5,10 @@ import fr.epsi.jconte.service.IPopulate;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
-import java.util.Random;
 
 public class PopulateNormalDistribution implements IPopulate {
 
-    private Random random = SecureRandom.getInstanceStrong();
+    private SecureRandom random = SecureRandom.getInstanceStrong();
 
     private double mean;
 
