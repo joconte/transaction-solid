@@ -10,12 +10,8 @@ public class TransactionAllForOne implements ITransaction {
 
     private SecureRandom random;
 
-    {
-        try {
-            random = SecureRandom.getInstanceStrong();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
+    public TransactionAllForOne() throws NoSuchAlgorithmException {
+        this.random = SecureRandom.getInstanceStrong();
     }
 
     @Override

@@ -10,21 +10,14 @@ public class PopulateNormalDistribution implements IPopulate {
 
     private SecureRandom random;
 
-    {
-        try {
-            random = SecureRandom.getInstanceStrong();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        }
-    }
-
     private double mean;
 
     private double deviation;
 
-    public PopulateNormalDistribution(double mean, double deviation) {
+    public PopulateNormalDistribution(double mean, double deviation) throws NoSuchAlgorithmException {
         this.mean = mean;
         this.deviation = deviation;
+        this.random = SecureRandom.getInstanceStrong();
     }
 
     @Override

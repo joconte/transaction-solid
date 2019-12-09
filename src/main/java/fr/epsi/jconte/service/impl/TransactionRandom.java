@@ -8,9 +8,10 @@ import java.security.SecureRandom;
 
 public class TransactionRandom implements ITransaction {
 
-    private SecureRandom random = SecureRandom.getInstanceStrong();
+    private SecureRandom random;
 
     public TransactionRandom() throws NoSuchAlgorithmException {
+        this.random = SecureRandom.getInstanceStrong();
     }
 
     @Override
