@@ -25,4 +25,15 @@ public class TransactionAllForOneTest {
         // Act
         assertTrue((person1.getWealth() == 0D && person2.getWealth() == 40D) || (person1.getWealth() == 40D && person2.getWealth() == 0D));
     }
+
+    @Test
+    public void myType() throws NoSuchAlgorithmException {
+
+        // Act
+        ITransaction transaction = new TransactionAllForOne();
+        String myType = transaction.myType();
+
+        // Assert
+        assertTrue(myType.equals("All for one transaction"));
+    }
 }
