@@ -1,14 +1,27 @@
 package fr.epsi.jconte;
 
-import fr.epsi.jconte.service.*;
-import fr.epsi.jconte.service.impl.*;
+import fr.epsi.jconte.service.initparam.IInitParam;
+import fr.epsi.jconte.service.initparam.impl.InitParamFromJSON;
+import fr.epsi.jconte.service.initparam.impl.InitParamFromProperties;
+import fr.epsi.jconte.service.initparam.impl.InitParamFromYAML;
+import fr.epsi.jconte.service.initpopulation.impl.CreatePopulation;
+import fr.epsi.jconte.service.initpopulation.ICreatePopulation;
+import fr.epsi.jconte.service.interaction.IInteraction;
+import fr.epsi.jconte.service.interaction.impl.InteractionRandomPersonAndOneOfHisNeighbor;
+import fr.epsi.jconte.service.interaction.impl.InteractionTwoRandomPersons;
+import fr.epsi.jconte.service.simulation.ISimulation;
+import fr.epsi.jconte.service.simulation.impl.Simulation;
+import fr.epsi.jconte.service.transaction.ITransaction;
+import fr.epsi.jconte.service.transaction.impl.TransactionAllForOne;
+import fr.epsi.jconte.service.transaction.impl.TransactionRandom;
+import fr.epsi.jconte.service.wealthdistribution.IWealthDistribution;
+import fr.epsi.jconte.service.wealthdistribution.impl.WealthDistributionConstantDistribution;
+import fr.epsi.jconte.service.wealthdistribution.impl.WealthDistributionNormalDistribution;
 import org.apache.log4j.BasicConfigurator;
-import org.apache.log4j.Logger;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 
 
@@ -17,51 +30,67 @@ public class App
     public static void main( String[] args ) throws IOException, ParseException, NoSuchAlgorithmException {
 
         // Parametrage
-        Logger logger = Logger.getLogger(App.class);
 
-        JSONParser jsonParser = new JSONParser();
+        BasicConfigurator.configure();
 
         File file = new File(
                 App.class.getClassLoader().getResource("init.json").getFile()
         );
 
-        FileReader fileReader = new FileReader(file);
-        Object obj = jsonParser.parse(fileReader);
-        JSONObject jsonObject = (JSONObject)obj;
-        Long numberOfPersonLong = (Long)jsonObject.get("taillePopulation");
-        Long meanLong = (Long)jsonObject.get("mean");
-        Long deviationLong = (Long)jsonObject.get("deviation");
-        Long nombreIterationLong = (Long)jsonObject.get("nombreIteration");
-        int numberOfPerson = numberOfPersonLong.intValue();
-        int mean = meanLong.intValue();
-        int deviation = deviationLong.intValue();
-        int numberOfIteration = nombreIterationLong.intValue();
+        IInitParam initParam = new InitParamFromJSON(file);
+        int numberOfPerson = initParam.getNumberOfPersons();
+        int mean = initParam.getMean();
+        int deviation = initParam.getDeviation();
+        int numberOfIteration = initParam.getNumberOfIterations();
 
-/*
-        int numberOfPerson = 100;
-        int mean = 100;
-        int deviation = 20;
-        int numberOfIteration = 1000;
- */
-        int wealth = 100;
-
-        BasicConfigurator.configure();
         ICreatePopulation createPopulation = new CreatePopulation(numberOfPerson);
-        IPopulate populateNormalDistribution = new PopulateNormalDistribution(mean, deviation);
-        IPopulate populateConstantDistribution = new PopulateConstantDistribution(wealth);
+        IWealthDistribution populateNormalDistribution = new WealthDistributionNormalDistribution(mean, deviation);
+        IWealthDistribution populateConstantDistribution = new WealthDistributionConstantDistribution(mean);
         ITransaction transactionRandom = new TransactionRandom();
-        IGetPersonsIndexes getRandomPerson = new GetRandomPersonIndexes();
-        IGetPersonsIndexes getNeighboorPerson = new GetRandomPersonAndOneOfHisNeightboor();
+        IInteraction getRandomPerson = new InteractionTwoRandomPersons(false);
+        IInteraction getNeighborPerson = new InteractionRandomPersonAndOneOfHisNeighbor(false);
         ITransaction transactionAllForOne = new TransactionAllForOne();
 
-        logger.info("Simulation avec une distribution normale de moyenne 100 et ecart type 20. Transaction random.");
-        Simulation simulation = new Simulation(createPopulation, populateNormalDistribution, transactionRandom, getRandomPerson, numberOfIteration);
+        ISimulation simulation = new Simulation(createPopulation, populateNormalDistribution, transactionRandom, getRandomPerson, numberOfIteration, false);
         simulation.makeSimulation();
 
-        logger.info("Simulation avec une distribution constante de 100. Transaction voisin seulement, all for one.");
-        simulation = new Simulation(createPopulation, populateConstantDistribution, transactionAllForOne, getNeighboorPerson, numberOfIteration);
+        simulation = new Simulation(createPopulation, populateConstantDistribution, transactionAllForOne, getNeighborPerson, numberOfIteration, false);
         simulation.makeSimulation();
 
+        IInitParam initParamFromProperties = new InitParamFromProperties("init.properties");
 
+        numberOfPerson = initParamFromProperties.getNumberOfPersons();
+        mean = initParamFromProperties.getMean();
+        deviation = initParamFromProperties.getDeviation();
+        numberOfIteration = initParamFromProperties.getNumberOfIterations();
+
+        createPopulation = new CreatePopulation(numberOfPerson);
+        populateNormalDistribution = new WealthDistributionNormalDistribution(mean, deviation);
+        populateConstantDistribution = new WealthDistributionConstantDistribution(mean);
+
+
+        simulation = new Simulation(createPopulation, populateNormalDistribution, transactionRandom, getRandomPerson, numberOfIteration, false);
+        simulation.makeSimulation();
+
+        simulation = new Simulation(createPopulation, populateConstantDistribution, transactionAllForOne, getNeighborPerson, numberOfIteration, false);
+        simulation.makeSimulation();
+
+        IInitParam initParamFromYAML = new InitParamFromYAML("init.yaml");
+
+        numberOfPerson = initParamFromYAML.getNumberOfPersons();
+        mean = initParamFromYAML.getMean();
+        deviation = initParamFromYAML.getDeviation();
+        numberOfIteration = initParamFromYAML.getNumberOfIterations();
+
+        createPopulation = new CreatePopulation(numberOfPerson);
+        populateNormalDistribution = new WealthDistributionNormalDistribution(mean, deviation);
+        populateConstantDistribution = new WealthDistributionConstantDistribution(mean);
+
+
+        simulation = new Simulation(createPopulation, populateNormalDistribution, transactionAllForOne, getRandomPerson, numberOfIteration, false);
+        simulation.makeSimulation();
+
+        simulation = new Simulation(createPopulation, populateConstantDistribution, transactionRandom, getNeighborPerson, numberOfIteration, false);
+        simulation.makeSimulation();
     }
 }

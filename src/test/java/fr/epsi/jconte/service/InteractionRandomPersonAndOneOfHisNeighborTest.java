@@ -2,19 +2,20 @@ package fr.epsi.jconte.service;
 
 import fr.epsi.jconte.model.IPerson;
 import fr.epsi.jconte.model.impl.Person;
-import fr.epsi.jconte.service.impl.GetRandomPersonAndOneOfHisNeightboor;
+import fr.epsi.jconte.service.interaction.impl.InteractionRandomPersonAndOneOfHisNeighbor;
+import fr.epsi.jconte.service.interaction.IInteraction;
 import org.javatuples.Pair;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class GetRandomPersonAndOneOfHisNeightboorTest {
+public class InteractionRandomPersonAndOneOfHisNeighborTest {
 
     @Test
     public void getRandomPersonAndOneOfHisNNeighBoor() {
 
         // Arrange
-        IGetPersonsIndexes getRandomPersonAndNeighboor = new GetRandomPersonAndOneOfHisNeightboor();
+        IInteraction getRandomPersonAndNeighboor = new InteractionRandomPersonAndOneOfHisNeighbor(false);
         IPerson[] persons = new IPerson[10];
         IPerson person1 = new Person(1L, 10);
         IPerson person2 = new Person(2L, 10);

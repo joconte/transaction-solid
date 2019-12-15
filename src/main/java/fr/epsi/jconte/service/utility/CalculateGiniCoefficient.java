@@ -1,4 +1,4 @@
-package fr.epsi.jconte.service.impl;
+package fr.epsi.jconte.service.utility;
 
 import fr.epsi.jconte.model.IPerson;
 

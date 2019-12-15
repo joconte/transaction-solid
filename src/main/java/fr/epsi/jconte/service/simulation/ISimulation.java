@@ -1,4 +1,4 @@
-package fr.epsi.jconte.service;
+package fr.epsi.jconte.service.simulation;
 
 public interface ISimulation {
 

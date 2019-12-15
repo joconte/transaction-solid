@@ -2,8 +2,7 @@ package fr.epsi.jconte.service;
 
 import fr.epsi.jconte.model.IPerson;
 import fr.epsi.jconte.model.impl.Person;
-import fr.epsi.jconte.service.impl.CalculateGiniCoefficient;
-import org.junit.Assert;
+import fr.epsi.jconte.service.utility.CalculateGiniCoefficient;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

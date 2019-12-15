@@ -1,6 +1,6 @@
 {
-  "taillePopulation": 100,
+  "taillePopulation": 10000,
   "mean": 100,
   "deviation": 20,
-  "nombreIteration": 10000
+  "nombreIteration": 100000
 }
