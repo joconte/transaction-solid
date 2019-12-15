@@ -19,10 +19,10 @@ public class CreatePopulationTest {
         IPerson[] persons = createPopulation.initPopulationNoWealth();
 
         // Assert
-        assertEquals(persons[0].getId(), 1L, 0.0);
-        assertEquals(persons[0].getWealth(), 0, 0.0);
-        assertEquals(persons[99].getId(), 100L, 0.0);
-        assertEquals(persons[0].getWealth(), 0, 0.0);
+        assertEquals(1L, persons[0].getId(), 0.0);
+        assertEquals(0, persons[0].getWealth(), 0.0);
+        assertEquals(100L, persons[99].getId(), 0.0);
+        assertEquals(0, persons[0].getWealth(), 0.0);
     }
 
     @Test
