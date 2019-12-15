@@ -21,6 +21,7 @@
     <sonar.jacoco.reportPath>target/jacoco.exec</sonar.jacoco.reportPath>
     <sonar.binaries>target/classes</sonar.binaries>
     <sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
+    <sonar.coverage.exclusions>*/App.java</sonar.coverage.exclusions>
   </properties>
 
   <dependencies>
