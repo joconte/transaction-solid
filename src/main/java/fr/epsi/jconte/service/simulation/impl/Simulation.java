@@ -41,6 +41,7 @@ public class Simulation implements ISimulation {
     @Override
     public void makeSimulation() {
 
+        LOGGER.info("\n");
         LOGGER.info("New simulation.");
         LOGGER.info("Create a population of " + createPopulation.getNumberOfPerson() + " persons");
         IPerson[] persons = createPopulation.initPopulationNoWealth();
@@ -49,7 +50,7 @@ public class Simulation implements ISimulation {
 
         LOGGER.info("Gini coefficient before any transaction :" + calculateGiniCoefficient.getGiniCoefficient(persons));
 
-        LOGGER.info("Do " + numberOfIteration + " iterations with : " + transaction.myType() + ", " + interaction.myType());
+        LOGGER.info("Do " + numberOfIteration + " iterations with : Transaction : " + transaction.myType() + ", Interaction : " + interaction.myType());
 
         for (int i = 0; i < numberOfIteration; i++) {
 
@@ -59,5 +60,6 @@ public class Simulation implements ISimulation {
         }
 
         LOGGER.info("Gini coefficient after " + numberOfIteration + " transactions :" + calculateGiniCoefficient.getGiniCoefficient(persons));
+        LOGGER.info("End of the simulation \n");
     }
 }
