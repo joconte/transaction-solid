@@ -1,7 +1,6 @@
 package fr.epsi.jconte.service.initparam.impl;
 
 import fr.epsi.jconte.service.utility.PrintUtiliy;
-import fr.epsi.jconte.service.initparam.IInitParam;
 import org.apache.log4j.Logger;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -11,14 +10,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class InitParamFromJSON implements IInitParam {
+public class InitParamFromJSON extends InitParam{
 
     public static final Logger LOGGER = Logger.getLogger(InitParamFromJSON.class);
-
-    private int numberOfPersons;
-    private int mean;
-    private int deviation;
-    private int numberOfIterations;
 
     public InitParamFromJSON(File jsonFile) throws IOException, ParseException {
 
@@ -41,25 +35,5 @@ public class InitParamFromJSON implements IInitParam {
         stringBuilder.append("\n");
         stringBuilder.append(PrintUtiliy.printParams(this.numberOfPersons, this.mean, this.deviation, this.numberOfIterations));
         LOGGER.info(stringBuilder.toString());
-    }
-
-    @Override
-    public int getNumberOfPersons() {
-        return this.numberOfPersons;
-    }
-
-    @Override
-    public int getMean() {
-        return this.mean;
-    }
-
-    @Override
-    public int getDeviation() {
-        return this.deviation;
-    }
-
-    @Override
-    public int getNumberOfIterations() {
-        return this.numberOfIterations;
     }
 }

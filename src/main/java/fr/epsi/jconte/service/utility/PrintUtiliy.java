@@ -4,6 +4,8 @@ import fr.epsi.jconte.model.IPerson;
 
 public class PrintUtiliy {
 
+    private PrintUtiliy() {}
+
     public static String printPersonsDetails(IPerson person1, IPerson person2) {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("\t - Person1 : \n");

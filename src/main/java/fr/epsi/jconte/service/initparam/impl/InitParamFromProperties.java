@@ -2,21 +2,15 @@ package fr.epsi.jconte.service.initparam.impl;
 
 import fr.epsi.jconte.App;
 import fr.epsi.jconte.service.utility.PrintUtiliy;
-import fr.epsi.jconte.service.initparam.IInitParam;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class InitParamFromProperties implements IInitParam {
+public class InitParamFromProperties extends InitParam {
 
     public static final Logger LOGGER = Logger.getLogger(InitParamFromProperties.class);
-
-    private int numberOfPersons;
-    private int mean;
-    private int deviation;
-    private int numberOfIterations;
 
     public InitParamFromProperties(String propertyFileName) throws IOException {
 
@@ -43,24 +37,5 @@ public class InitParamFromProperties implements IInitParam {
         stringBuilder.append("\n");
         stringBuilder.append(PrintUtiliy.printParams(this.numberOfPersons, this.mean, this.deviation, this.numberOfIterations));
         LOGGER.info(stringBuilder.toString());
-    }
-    @Override
-    public int getNumberOfPersons() {
-        return this.numberOfPersons;
-    }
-
-    @Override
-    public int getMean() {
-        return this.mean;
-    }
-
-    @Override
-    public int getDeviation() {
-        return this.deviation;
-    }
-
-    @Override
-    public int getNumberOfIterations() {
-        return this.numberOfIterations;
     }
 }
