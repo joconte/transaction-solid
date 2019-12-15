@@ -1,21 +1,21 @@
-package fr.epsi.jconte.service;
+package fr.epsi.jconte.service.interaction;
 
 import fr.epsi.jconte.model.IPerson;
 import fr.epsi.jconte.model.impl.Person;
-import fr.epsi.jconte.service.interaction.impl.InteractionRandomPersonAndOneOfHisNeighbor;
-import fr.epsi.jconte.service.interaction.IInteraction;
+import fr.epsi.jconte.service.interaction.impl.InteractionTwoRandomPersons;
 import org.javatuples.Pair;
 import org.junit.Test;
 
+import java.security.NoSuchAlgorithmException;
+
 import static org.junit.Assert.*;
 
-public class InteractionRandomPersonAndOneOfHisNeighborTest {
+public class InteractionTwoRandomPersonsTest {
 
     @Test
-    public void getRandomPersonAndOneOfHisNNeighBoor() {
+    public void getTwoPersons() throws NoSuchAlgorithmException {
 
         // Arrange
-        IInteraction getRandomPersonAndNeighboor = new InteractionRandomPersonAndOneOfHisNeighbor(false);
         IPerson[] persons = new IPerson[10];
         IPerson person1 = new Person(1L, 10);
         IPerson person2 = new Person(2L, 10);
@@ -39,9 +39,21 @@ public class InteractionRandomPersonAndOneOfHisNeighborTest {
         persons[9] = person10;
 
         // Act
-        Pair<IPerson, IPerson> pairs = getRandomPersonAndNeighboor.getTwoPersons(persons);
+        IInteraction interaction = new InteractionTwoRandomPersons(false);
+        Pair<IPerson, IPerson> personPair = interaction.getTwoPersons(persons);
 
         // Assert
-        assertTrue(Math.abs(pairs.getValue0().getId() - pairs.getValue1().getId()) == 1);
+        assertTrue(!personPair.getValue0().equals(personPair.getValue1()));
+    }
+
+    @Test
+    public void myType() throws NoSuchAlgorithmException {
+
+        // Act
+        IInteraction interaction = new InteractionTwoRandomPersons(false);
+        String myType = interaction.myType();
+
+        // Assert
+        assertTrue(myType.equals("Pick two random persons"));
     }
 }
