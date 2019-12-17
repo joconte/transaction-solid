@@ -1,9 +1,13 @@
 package fr.epsi.jconte.service.initpopulation.impl;
 
+import fr.epsi.jconte.model.IPerson;
 import fr.epsi.jconte.model.impl.Person;
 import fr.epsi.jconte.service.initpopulation.ICreatePopulation;
 import org.apache.log4j.Logger;
 
+/**
+ * Provide methods to create population of IPerson.
+ */
 public class CreatePopulation implements ICreatePopulation {
 
     public static final Logger LOGGER = Logger.getLogger(CreatePopulation.class);
@@ -14,8 +18,12 @@ public class CreatePopulation implements ICreatePopulation {
         this.numberOfPerson = numberOfPerson;
     }
 
+    /**
+     * Create a "population" (IPerson[]) with no wealth.
+     * @return
+     */
     @Override
-    public Person[] initPopulationNoWealth() {
+    public IPerson[] initPopulationNoWealth() {
 
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Init a population of ");
@@ -23,7 +31,7 @@ public class CreatePopulation implements ICreatePopulation {
         stringBuilder.append(" person(s) with no wealth.");
         LOGGER.info(stringBuilder.toString());
 
-        Person[] persons = new Person[numberOfPerson];
+        IPerson[] persons = new IPerson[numberOfPerson];
         Long i = 1L;
 
         for (int j = 0; j < persons.length; j++) {
@@ -33,6 +41,10 @@ public class CreatePopulation implements ICreatePopulation {
         return persons;
     }
 
+    /**
+     * Return the number of persons.
+     * @return
+     */
     @Override
     public int getNumberOfPerson() {
         return this.numberOfPerson;

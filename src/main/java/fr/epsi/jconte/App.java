@@ -32,6 +32,7 @@ public class App
         // Config logger
         BasicConfigurator.configure();
 
+        // Get json file
         File file = new File(
                 App.class.getClassLoader().getResource("init.json").getFile()
         );
@@ -52,9 +53,11 @@ public class App
         IInteraction getNeighborPerson = new InteractionRandomPersonAndOneOfHisNeighbor(false);
         ITransaction transactionAllForOne = new TransactionAllForOne();
 
+        // Simulation
         ISimulation simulation = new Simulation(createPopulation, populateNormalDistribution, transactionRandom, getRandomPerson, numberOfIteration, false);
         simulation.makeSimulation();
 
+        // Simulation
         simulation = new Simulation(createPopulation, populateConstantDistribution, transactionAllForOne, getNeighborPerson, numberOfIteration, false);
         simulation.makeSimulation();
 
@@ -70,10 +73,11 @@ public class App
         populateNormalDistribution = new WealthDistributionNormalDistribution(mean, deviation);
         populateConstantDistribution = new WealthDistributionConstantDistribution(mean);
 
-
+        // Simulation
         simulation = new Simulation(createPopulation, populateNormalDistribution, transactionRandom, getRandomPerson, numberOfIteration, false);
         simulation.makeSimulation();
 
+        // Simulation
         simulation = new Simulation(createPopulation, populateConstantDistribution, transactionAllForOne, getNeighborPerson, numberOfIteration, false);
         simulation.makeSimulation();
 
@@ -89,9 +93,11 @@ public class App
         populateNormalDistribution = new WealthDistributionNormalDistribution(mean, deviation);
         populateConstantDistribution = new WealthDistributionConstantDistribution(mean);
 
+        // Simulation
         simulation = new Simulation(createPopulation, populateNormalDistribution, transactionAllForOne, getRandomPerson, numberOfIteration, false);
         simulation.makeSimulation();
 
+        // Simulation
         simulation = new Simulation(createPopulation, populateConstantDistribution, transactionRandom, getNeighborPerson, numberOfIteration, false);
         simulation.makeSimulation();
     }

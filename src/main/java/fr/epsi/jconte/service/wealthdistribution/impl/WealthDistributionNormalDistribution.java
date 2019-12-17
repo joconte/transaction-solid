@@ -7,6 +7,9 @@ import org.apache.log4j.Logger;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
+/**
+ * Provides methods to give wealth to IPerson's following a normal distribution.
+ */
 public class WealthDistributionNormalDistribution implements IWealthDistribution {
 
     public static final Logger LOGGER = Logger.getLogger(WealthDistributionNormalDistribution.class);
@@ -23,6 +26,11 @@ public class WealthDistributionNormalDistribution implements IWealthDistribution
         this.random = SecureRandom.getInstanceStrong();
     }
 
+    /**
+     * Give wealth to IPerson in a IPerson array following a normal distribution.
+     * @param persons
+     * @return
+     */
     @Override
     public IPerson[] populate(IPerson[] persons) {
 

@@ -9,6 +9,9 @@ import org.javatuples.Pair;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
+/**
+ * Provides methods for the interactions of 2 random persons.
+ */
 public class InteractionTwoRandomPersons implements IInteraction {
 
     public static final Logger LOGGER = Logger.getLogger(InteractionTwoRandomPersons.class);
@@ -21,6 +24,12 @@ public class InteractionTwoRandomPersons implements IInteraction {
         this.random = SecureRandom.getInstanceStrong();
         this.verbose = verbose;
     }
+
+    /**
+     * Return a pair of IPerson randomly picked in IPerson[].
+     * @param persons
+     * @return
+     */
     @Override
     public Pair<IPerson, IPerson> getTwoPersons(IPerson[] persons) {
 
@@ -44,6 +53,10 @@ public class InteractionTwoRandomPersons implements IInteraction {
         return new Pair<>(persons[indexPerson1], persons[indexPerson2]);
     }
 
+    /**
+     * Return the type of the interaction.
+     * @return
+     */
     @Override
     public String myType() {
         return "Pick two random persons";

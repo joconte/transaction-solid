@@ -2,6 +2,9 @@ package fr.epsi.jconte.service.initparam.impl;
 
 import fr.epsi.jconte.service.initparam.IInitParam;
 
+/**
+ * Abstract class that provides the minimum properties and methods used when initializing parameters.
+ */
 public abstract class InitParam implements IInitParam {
 
     protected int numberOfPersons;

@@ -8,6 +8,9 @@ import org.apache.log4j.Logger;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 
+/**
+ * Provides methods to make 'All for one' transactions between IPerson.
+ */
 public class TransactionAllForOne implements ITransaction {
 
     public static final Logger LOGGER = Logger.getLogger(TransactionAllForOne.class);
@@ -18,6 +21,12 @@ public class TransactionAllForOne implements ITransaction {
         this.random = SecureRandom.getInstanceStrong();
     }
 
+    /**
+     * Make a 'All for one' transaction between two IPerson.
+     * @param person1
+     * @param person2
+     * @param verbose
+     */
     @Override
     public void makeTransaction(IPerson person1, IPerson person2, boolean verbose) {
 
@@ -41,6 +50,10 @@ public class TransactionAllForOne implements ITransaction {
             LOGGER.info(stringBuilder.toString());
     }
 
+    /**
+     * Return the type of the transaction.
+     * @return
+     */
     @Override
     public String myType() {
         return "All for one transaction";

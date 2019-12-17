@@ -7,10 +7,17 @@ import org.yaml.snakeyaml.Yaml;
 import java.io.InputStream;
 import java.util.Map;
 
+/**
+ * Provide methods to initialize parameters from YAML files.
+ */
 public class InitParamFromYAML extends InitParam {
 
     public static final Logger LOGGER = Logger.getLogger(InitParamFromYAML.class);
 
+    /**
+     * Initialize parameters from a YAML file.
+     * @param yamlFileName
+     */
     public InitParamFromYAML(String yamlFileName) {
 
         StringBuilder stringBuilder = new StringBuilder();

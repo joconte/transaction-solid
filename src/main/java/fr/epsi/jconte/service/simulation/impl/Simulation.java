@@ -10,6 +10,9 @@ import fr.epsi.jconte.service.wealthdistribution.IWealthDistribution;
 import org.apache.log4j.Logger;
 import org.javatuples.Pair;
 
+/**
+ * Provides methods to run the economical simulation.
+ */
 public class Simulation implements ISimulation {
 
     public static final Logger LOGGER = Logger.getLogger(Simulation.class);
@@ -38,6 +41,9 @@ public class Simulation implements ISimulation {
         this.verbose = verbose;
     }
 
+    /**
+     * Run the economical simulation.
+     */
     @Override
     public void makeSimulation() {
 

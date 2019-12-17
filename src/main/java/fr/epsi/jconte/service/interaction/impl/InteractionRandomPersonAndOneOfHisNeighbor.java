@@ -8,6 +8,9 @@ import org.javatuples.Pair;
 
 import java.security.SecureRandom;
 
+/**
+ * Provides methods for the interactions of a person and his neighbor.
+ */
 public class InteractionRandomPersonAndOneOfHisNeighbor implements IInteraction {
 
     public static final Logger LOGGER = Logger.getLogger(InteractionRandomPersonAndOneOfHisNeighbor.class);
@@ -18,6 +21,11 @@ public class InteractionRandomPersonAndOneOfHisNeighbor implements IInteraction 
         this.verbose = verbose;
     }
 
+    /**
+     * Return a pair of IPerson that are neighbor in IPerson[].
+     * @param persons
+     * @return
+     */
     @Override
     public Pair<IPerson, IPerson> getTwoPersons(IPerson[] persons) {
 
@@ -37,6 +45,10 @@ public class InteractionRandomPersonAndOneOfHisNeighbor implements IInteraction 
         return new Pair<>(persons[indexPerson1], persons[indexPerson2]);
     }
 
+    /**
+     * Return the type of the interaction.
+     * @return
+     */
     @Override
     public String myType() {
         return "A random person and one of his neighbor";

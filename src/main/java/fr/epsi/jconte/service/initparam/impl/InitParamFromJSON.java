@@ -10,10 +10,19 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * Provide methods to initialize parameters from JSON files.
+ */
 public class InitParamFromJSON extends InitParam{
 
     public static final Logger LOGGER = Logger.getLogger(InitParamFromJSON.class);
 
+    /**
+     * Initialize parameters from JSON File.
+     * @param jsonFile
+     * @throws IOException
+     * @throws ParseException
+     */
     public InitParamFromJSON(File jsonFile) throws IOException, ParseException {
 
         StringBuilder stringBuilder = new StringBuilder();

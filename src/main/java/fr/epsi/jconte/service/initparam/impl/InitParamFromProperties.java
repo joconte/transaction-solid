@@ -8,10 +8,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * Provide methods to initialize parameters from properties files.
+ */
 public class InitParamFromProperties extends InitParam {
 
     public static final Logger LOGGER = Logger.getLogger(InitParamFromProperties.class);
 
+    /**
+     * Initialize parameters from a property file.
+     * @param propertyFileName
+     * @throws IOException
+     */
     public InitParamFromProperties(String propertyFileName) throws IOException {
 
         StringBuilder stringBuilder = new StringBuilder();

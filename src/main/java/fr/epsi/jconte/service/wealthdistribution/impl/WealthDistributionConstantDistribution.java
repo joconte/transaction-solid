@@ -4,6 +4,9 @@ import fr.epsi.jconte.model.IPerson;
 import fr.epsi.jconte.service.wealthdistribution.IWealthDistribution;
 import org.apache.log4j.Logger;
 
+/**
+ * Provides methods to distribute constant wealth to IPerson.
+ */
 public class WealthDistributionConstantDistribution implements IWealthDistribution {
 
     public static final Logger LOGGER = Logger.getLogger(WealthDistributionConstantDistribution.class);
@@ -14,6 +17,11 @@ public class WealthDistributionConstantDistribution implements IWealthDistributi
         this.wealth = wealth;
     }
 
+    /**
+     * Distribute constant wealth to a IPerson array and return the array.
+     * @param persons
+     * @return
+     */
     @Override
     public IPerson[] populate(IPerson[] persons) {
 

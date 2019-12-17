@@ -5,8 +5,16 @@ import fr.epsi.jconte.model.IPerson;
 import java.util.Arrays;
 import java.util.Comparator;
 
+/**
+ * Provides methods to calculate Gini Coefficient.
+ */
 public class CalculateGiniCoefficient {
 
+    /**
+     * Return the Gini Coefficient of a IPerson population (IPerson[]).
+     * @param persons
+     * @return
+     */
     public double getGiniCoefficient(IPerson[] persons) {
 
         Arrays.sort(persons, Comparator.comparing(IPerson::getWealth));
