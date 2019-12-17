@@ -29,20 +29,21 @@ public class App
 {
     public static void main( String[] args ) throws IOException, ParseException, NoSuchAlgorithmException {
 
-        // Parametrage
-
+        // Config logger
         BasicConfigurator.configure();
 
         File file = new File(
                 App.class.getClassLoader().getResource("init.json").getFile()
         );
 
+        // Init param from JSON
         IInitParam initParam = new InitParamFromJSON(file);
         int numberOfPerson = initParam.getNumberOfPersons();
         int mean = initParam.getMean();
         int deviation = initParam.getDeviation();
         int numberOfIteration = initParam.getNumberOfIterations();
 
+        // Param services
         ICreatePopulation createPopulation = new CreatePopulation(numberOfPerson);
         IWealthDistribution populateNormalDistribution = new WealthDistributionNormalDistribution(mean, deviation);
         IWealthDistribution populateConstantDistribution = new WealthDistributionConstantDistribution(mean);
@@ -57,13 +58,14 @@ public class App
         simulation = new Simulation(createPopulation, populateConstantDistribution, transactionAllForOne, getNeighborPerson, numberOfIteration, false);
         simulation.makeSimulation();
 
+        // Init param from properties
         IInitParam initParamFromProperties = new InitParamFromProperties("init.properties");
-
         numberOfPerson = initParamFromProperties.getNumberOfPersons();
         mean = initParamFromProperties.getMean();
         deviation = initParamFromProperties.getDeviation();
         numberOfIteration = initParamFromProperties.getNumberOfIterations();
 
+        // Re-param some services impacted by the param changes
         createPopulation = new CreatePopulation(numberOfPerson);
         populateNormalDistribution = new WealthDistributionNormalDistribution(mean, deviation);
         populateConstantDistribution = new WealthDistributionConstantDistribution(mean);
@@ -75,17 +77,17 @@ public class App
         simulation = new Simulation(createPopulation, populateConstantDistribution, transactionAllForOne, getNeighborPerson, numberOfIteration, false);
         simulation.makeSimulation();
 
+        // Init param from YAML file
         IInitParam initParamFromYAML = new InitParamFromYAML("init.yaml");
-
         numberOfPerson = initParamFromYAML.getNumberOfPersons();
         mean = initParamFromYAML.getMean();
         deviation = initParamFromYAML.getDeviation();
         numberOfIteration = initParamFromYAML.getNumberOfIterations();
 
+        // Re-param some services empacted by the param changes
         createPopulation = new CreatePopulation(numberOfPerson);
         populateNormalDistribution = new WealthDistributionNormalDistribution(mean, deviation);
         populateConstantDistribution = new WealthDistributionConstantDistribution(mean);
-
 
         simulation = new Simulation(createPopulation, populateNormalDistribution, transactionAllForOne, getRandomPerson, numberOfIteration, false);
         simulation.makeSimulation();
