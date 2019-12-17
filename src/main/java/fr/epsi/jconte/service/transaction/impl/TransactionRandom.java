@@ -31,7 +31,7 @@ public class TransactionRandom implements ITransaction {
     public void makeTransaction(IPerson person1, IPerson person2, boolean verbose) {
 
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("All for one transaction : \n");
+        stringBuilder.append("Random transaction : \n");
         stringBuilder.append("- Before :\n");
         stringBuilder.append(PrintUtiliy.printPersonsDetails(person1, person2));
 
@@ -42,7 +42,7 @@ public class TransactionRandom implements ITransaction {
         person1.setWealth(newPerson1Wealth);
         person2.setWealth(newPerson2Wealth);
 
-        stringBuilder.append("All for one transaction : \n");
+        stringBuilder.append("Random transaction : \n");
         stringBuilder.append("- Before :\n");
         stringBuilder.append(PrintUtiliy.printPersonsDetails(person1, person2));
 

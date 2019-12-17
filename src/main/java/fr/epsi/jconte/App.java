@@ -94,11 +94,11 @@ public class App
         populateConstantDistribution = new WealthDistributionConstantDistribution(mean);
 
         // Simulation
-        simulation = new Simulation(createPopulation, populateNormalDistribution, transactionAllForOne, getRandomPerson, numberOfIteration, false);
+        simulation = new Simulation(createPopulation, populateNormalDistribution, transactionAllForOne, getRandomPerson, numberOfIteration, true);
         simulation.makeSimulation();
 
         // Simulation
-        simulation = new Simulation(createPopulation, populateConstantDistribution, transactionRandom, getNeighborPerson, numberOfIteration, false);
+        simulation = new Simulation(createPopulation, populateConstantDistribution, transactionRandom, getNeighborPerson, numberOfIteration, true);
         simulation.makeSimulation();
     }
 }
